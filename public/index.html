@@ -6,40 +6,131 @@
     <title>My Static Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --container-bg: rgb(113, 113, 194);
+            --text-color: white;
+            --container3-bg: rgb(87, 189, 124);
+            --container3-text: black;
+            --container-link-bg: rgb(105, 120, 200);
+            --container-link-text: rgb(255, 255, 255);
+            --link-box-bg: #ffffff;
+            --link-box-text: #000000;
+            --footer-bg: #ffffff;
+            --footer-text: #e0e0e0;
+        } 
+       
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --container-bg: #2d2d2d;
+            --text-color: #e0e0e0;
+            --container3-bg: #2d2d2d;
+            --container3-text: #e0e0e0;       
+            --container-link-bg: #ef9d2a;
+            --container-link-text: #e0e0e0;
+            --link-box-bg: #ffffff;
+            --link-box-text: #e0e0e0;
+            --footer-bg: #323131;
+            --footer-text: #e0e0e0;
+        } 
+        
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #e88916;
             color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #d17a15;
+        }
+
+        .container, .container2, .container3, .side-box {
+            background-color: var(--container-bg);
+            transition: all 0.3s ease;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            padding-left: 20px;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            background-color: rgb(113, 113, 194);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 2;
+        }
+        .side-box {
+            max-width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
         }
         .container2 {
             max-width: 800px;
             margin: 3 auto;
-            background-color: rgb(113, 113, 194);
             padding: 20px;
-            border: 4px solid #e88916;
+            border: 4px solid #e88916; 
             border-radius: 40px;
             box-shadow: 1 2px 4px rgba(0,0,0,0.1);
         }
         .container3 {
             max-width: 800px;
             margin: 3 auto;
-            background-color: rgb(87, 189, 124);
+            background-color: var(--container3-bg);
             padding: 20px;
             border: 4px solid #e88916;
             border-radius: 40px;
             box-shadow: 1 2px 4px rgba(0,0,0,0.1);
-            color: black
+            color: var(--container3-text);
+            transition: all 0.3s ease;
+        }
+        .link-container {
+            max-width: 100px;
+            margin: 3 auto;
+            background-color: var(--container-link-bg);
+            padding: 20px;
+            border: 4px solid #e88916;
+            border-radius: 40px;
+            box-shadow: 1 2px 4px rgba(0,0,0,0.1);
+            color: var(--container-link-text);
+            transition: all 0.3s ease;
+        }  
+        .link-box { 
+            max-width: 300px;
+            margin: 6 auto;
+            background-color: var(--link-box-bg);
+            padding: 20px;
+            border: 4px solid #e88916;
+            border-radius: 40px;
+            box-shadow: 1 2px 4px rgba(0,0,0,0.1);
+            color: var(--link-box-text);
+            transition: all 0.3s ease;
         }
         h1 {
             color: white;
@@ -55,29 +146,181 @@
             font-family: 'pacifico', cursive;
             font-size: 1.2em;
         }
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .search-box {
+            padding: 10px;
+            width: 60%;
+            border: 2px solid #e88916;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background-color: #e88916;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .search-button:hover {
+            background-color: #d17a15;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: white;
+            border-top: 4px solid #e88916;
+            color: var(--footer-text);
+            background-color: var(--footer-bg);
+
+        }
+
+        .footer img {
+            max-width: 450px;
+            height: auto;
+        }
+
+        .footer p {
+            margin-top: 10px;
+        }
+
+        .audio-player {
+            margin-top: 15px;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>imagehub</h1>
-        <p>This is a simple website by Node.js and Express.</p>
-        <p class="highlight">hey! you are new?</p>
+    <button class="theme-toggle" onclick="toggleTheme()"> Dark Mode</button>
+    <div class="main-container">
+        <div class="side-box">
+            <h2>random Links</h2>
+            <ul>
+                <li><a href="https://canva.com" style="color: white;">canva</a></li>
+                <li><a href="https://reddit.com" style="color: white;">reddit</a></li>
+                <li><a href="https://weather.com" style="color: white;">weather</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <h1>linkshub</h1>
+            <p>This is a simple website by Node.js and Express.</p>
+            <p class="highlight">hey! you are new?</p>
+        </div>
     </div>
     <br/>
     <br/>
     <div class="container2">
-        this web is an image sender <br/>
+        this website is a search engine for every link in the web <br/>
        you can use it as you like!!! (enjoy it) 
     </div>
 
-    <a href="https://www.canva.com" target="_blank" >click heare to go to canva!(the first  image sendersite) </a>
-
-    <div class="container3">
-    <b>now you can start your imagehub routine!!!</b>
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="search for links!">
+        <button class="search-button" onclick="performSearch()">Search</button>
     </div>
 
 
+    <div class="container3">
+        <b>now you can start your imagehub routine!!!</b>
+    </div>
+<br/> 
+<div class="link-container" >
+    <b>here some other links🥰</b>
+</div>
+       
+<div class="link-box"> 
+    <a href="https://github.com">_github </a><br/>
+
+    <a href="https://poki.com">_poki </a><br/>
+    <a href="https://crazygames.com">_c.games </a><br/>
+    <a href="https://itch.io">_github </a><br/>
+    <a href="https://wikifandom.com">_wiki f. </a><br/>
+    <a href="https://cursor.io">_cursor.io </a><br/>
+    <a href="https://libero.it">_libero (italian site) </a><br/>
+    <a href="https://amazon.com">_amazon </a><br/>
+    <a href="https://play.unity.com/en/studio">_struckd studio (from unity) </a><br/>
+    <a href="https://tiktok.com">_TikTok </a><br/>
+</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm.trim() !== '') {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
+                window.open(searchUrl, '_blank', 'noopener');
+            }
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <footer class="footer">
+        <img src="/images/LINKSHUB-logo.png" alt="LinksHub Logo">
+        <p>© liiiiiiiiiiiiiiiinkshub@.</p>
+        <div class="audio-player">
+            <audio controls autoplay loop>
+                <source src="/music/music.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </footer>
 </body>
 </html> 
